@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
 // Components
 import Input from './components/Input'
 import Square from './components/Square'
 
-import './Style.css';
+import './Style.css'
 
 function App() {
   return (

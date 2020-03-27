@@ -1,7 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default class Square extends Component {
-    render() {
-        return <div className="square" />
-    }
+import store from '../store'
+
+export default function Square() {
+  const [inputValue, setInputValue] = useState(store.get('inputValue'))
+
+  useEffect(() => {
+    store.listen('inputValue', value => setInputValue(value))
+  }, [])
+
+  function handleClick() {
+    store.update('inputColor', '#CCC')
+  }
+
+  return (
+    <div className="square" onClick={handleClick}>
+      {inputValue}
+    </div>
+  )
 }

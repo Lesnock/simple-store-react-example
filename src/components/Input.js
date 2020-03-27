@@ -1,7 +1,29 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default class Input extends Component {
-  render() {
-    return <input type="text" className="input" placeholder="Digite um valor" />
+import store from '../store'
+
+export default function Input() {
+  const [inputValue] = useState(store.get('inputValue'))
+  const [inputColor, setInputColor] = useState(store.get('inputColor'))
+
+  useEffect(() => {
+    store.listen('inputColor', color => setInputColor(color))
+  }, [])
+
+  function handleChange(event) {
+    store.update('inputValue', event.target.value)
   }
+
+  return (
+    <input
+      type="text"
+      className="input"
+      placeholder="Digite um valor"
+      defaultValue={inputValue}
+      onChange={handleChange}
+      style={{ background: inputColor }}
+    />
+  )
 }
+
+// @lesnock/simple-store
